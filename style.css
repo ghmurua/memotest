@@ -1,0 +1,27 @@
+body {
+    background-color: teal;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: grid;
+    height: 100vh;
+    place-items: center;
+}
+
+.root {
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    gap: 5px;
+}
+
+.card {
+    border: 2px black solid;
+    background-color: ivory;
+    width: 50px;
+    height: 75px;
+    border-radius: 5px;
+    font-size: xx-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
