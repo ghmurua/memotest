@@ -6,9 +6,11 @@ body {
     display: grid;
     height: 100vh;
     place-items: center;
+    user-select: none;
 }
 
 .root {
+    position: absolute;
     display: grid;
     grid-template-columns: repeat(6, auto);
     gap: 5px;
@@ -25,7 +27,6 @@ body {
     justify-content: center;
     align-items: center;
     box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
-    user-select: none;
     transition: transform .4s;
 }
 
@@ -49,4 +50,38 @@ body {
 
 .flipToHideStep2 {
     transform: rotateY(0deg);
+}
+
+.start {
+    position: absolute;
+    height: 150px;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.8);
+    display: grid;
+    place-items: center;
+    align-content: space-evenly;
+}
+.info div {
+    font-size: large;
+    font-weight: bolder;
+    color: #eee;
+    background-color: rgba(0,0,0,0.5);
+    padding: 3px 80px;
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    display: flex;
+    padding: 8px 15px;
+    background-color:gold;
+    color: #111;
+    font-weight: bolder;
+    border-radius: 15px;
+}
+
+button:hover {
+    background-color: rgb(245,195,0);
 }
