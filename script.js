@@ -1,28 +1,28 @@
 const root = document.querySelector('.root');
-let deck = ['A','A',2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,'J','J','Q','Q','K','K'];
-let shuffledDeck = [];
+let oldDeck = ['A','A',2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,'J','J','Q','Q','K','K'];
+let deck = [];
 let valueCard1 = '';
 let valueCard2 = '';
 let match = false;
 let card1;
 let card2;
 
-const flipingCard = (e) => {
+const seeCard = (e) => {
     let id = e.target.id;
-                               // si la carta ya está 'expose' no entra
-    if ((valueCard2 === '') && !(e.target.classList.contains('expose'))) {
+                               // clic on cards exposed do nothing
+    if ((valueCard2 === '') && !(e.target.classList.contains('exposed'))) {
         if (valueCard1 === '') {
-            valueCard1 = shuffledDeck[id.slice(2)-1];
+            valueCard1 = deck[id.slice(2)-1];
             card1 = document.getElementById(`${id}`);
-            card1.classList.add('expose');
+            card1.classList.add('exposed');
             card1.innerText = valueCard1;
             return;
         }
     
         if (valueCard2 === '') {
-            valueCard2 = shuffledDeck[id.slice(2)-1];
+            valueCard2 = deck[id.slice(2)-1];
             card2 = document.getElementById(`${id}`);
-            card2.classList.add('expose');
+            card2.classList.add('exposed');
             card2.innerText = valueCard2;
 
             if (valueCard1 === valueCard2) match = true
@@ -33,9 +33,9 @@ const flipingCard = (e) => {
                 valueCard1 = '';
                 valueCard2 = '';
                 card1.innerText = '';
-                card1.classList.toggle('expose');
+                card1.classList.toggle('exposed');
                 card2.innerText = '';
-                card2.classList.toggle('expose');
+                card2.classList.toggle('exposed');
             },1000);
         }
 
@@ -50,17 +50,17 @@ const flipingCard = (e) => {
 
 // shuffling deck
 do {
-    let index = Math.floor(Math.random() * (deck.length-1));
-    shuffledDeck.push(deck[index]);
-    deck.splice(index,1);
-} while (deck.length > 0)
+    let index = Math.floor(Math.random() * (oldDeck.length-1));
+    deck.push(oldDeck[index]);
+    oldDeck.splice(index,1);
+} while (oldDeck.length > 0)
 
 // painting shuffled deck
-for ( let i=0; i<shuffledDeck.length ; i++ ) {
+for ( let i=0; i<deck.length ; i++ ) {
     root.innerHTML += `<div id='id${(i+1)}' class='card'></div>`;
 }
 
 // adding listeners
-for ( let j=0; j<shuffledDeck.length ; j++ ) {
-    document.querySelector(`#id${(j+1)}`).addEventListener('click', flipingCard);
+for ( let j=0; j<deck.length ; j++ ) {
+    document.querySelector(`#id${(j+1)}`).addEventListener('click', seeCard);
 }
