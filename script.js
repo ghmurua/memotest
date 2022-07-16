@@ -6,6 +6,30 @@ let valueCard2 = '';
 let card1;
 let card2;
 
+const flipToShow = (card,value) => {
+    card.classList.add('flipToShowStep1');
+    setTimeout(()=>{
+        card.innerText = value;
+        card.classList.add('flipToShowStep2');
+        card.classList.remove('flipToShowStep1');
+    }, 400);
+    setTimeout(()=>{
+        card.classList.remove('flipToShowStep2');
+    }, 800);
+}
+
+const flipToHide = (card) => {
+    card.classList.add('flipToHideStep1');
+    setTimeout(()=>{
+        card.innerText = '';
+        card.classList.add('flipToHideStep2');
+        card.classList.remove('flipToHideStep1');
+    }, 400);
+    setTimeout(()=>{
+        card.classList.remove('flipToHideStep2');
+    }, 800);
+}
+
 const seeCard = (e) => {
     let id = e.target.id;
     if ((valueCard2 === '') && !(e.target.classList.contains('exposed'))) {
@@ -13,14 +37,14 @@ const seeCard = (e) => {
             valueCard1 = deck[id.slice(2)-1];
             card1 = document.getElementById(`${id}`);
             card1.classList.add('exposed');
-            card1.innerText = valueCard1;
+            flipToShow(card1, valueCard1);
             return;
         }
     
         valueCard2 = deck[id.slice(2)-1];
         card2 = document.getElementById(`${id}`);
         card2.classList.add('exposed');
-        card2.innerText = valueCard2;
+        flipToShow(card2, valueCard2);
 
         if (valueCard1 === valueCard2) {
             console.log('found pair of',valueCard1);
@@ -32,9 +56,9 @@ const seeCard = (e) => {
         setTimeout(()=>{
             valueCard1 = '';
             valueCard2 = '';
-            card1.innerText = '';
+            flipToHide(card1);
+            flipToHide(card2);
             card1.classList.toggle('exposed');
-            card2.innerText = '';
             card2.classList.toggle('exposed');
         },1000);
     }

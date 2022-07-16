@@ -26,8 +26,27 @@ body {
     align-items: center;
     box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
     user-select: none;
+    transition: transform .4s;
 }
 
 .exposed {
     background-color: ivory;
+}
+
+.flipToShowStep1 {
+    transform: rotateY(90deg);
+    background-color: tomato;
+}
+
+.flipToShowStep2 {
+    transform: rotateY(0deg);
+}
+
+.flipToHideStep1 {
+    transform: rotateY(90deg);
+    background-color: ivory;
+}
+
+.flipToHideStep2 {
+    transform: rotateY(0deg);
 }
